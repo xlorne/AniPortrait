@@ -182,6 +182,12 @@ python -m scripts.vid2pose --video_path pose_video_path.mp4
 python -m scripts.vid2vid --config ./configs/prompts/animation_facereenac.yaml -W 512 -H 512 -acc
 ```
 
+only video remove pose and image on scripts.vid2vid2
+
+```shell
+python -m scripts.vid2vid2 --config ./configs/prompts/animation_facereenac.yaml -W 512 -H 512 -acc
+```
+
 Add source face videos and reference images in the animation_facereenac.yaml.
 
 ### Audio driven

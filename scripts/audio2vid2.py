@@ -223,9 +223,9 @@ def main():
             
             video_length = len(pose_list)
 
-            pose_tensor = torch.stack(pose_tensor_list, dim=0)  # (f, c, h, w)
-            pose_tensor = pose_tensor.transpose(0, 1)
-            pose_tensor = pose_tensor.unsqueeze(0)
+            # pose_tensor = torch.stack(pose_tensor_list, dim=0)  # (f, c, h, w)
+            # pose_tensor = pose_tensor.transpose(0, 1)
+            # pose_tensor = pose_tensor.unsqueeze(0)
 
             video = pipe(
                 ref_image_pil,
@@ -252,12 +252,16 @@ def main():
             
             # video = torch.cat([ref_image_tensor, pose_tensor[:,:,:video.shape[2]], video], dim=0)
             save_path = f"{save_dir}/{ref_name}_{audio_name}_{args.H}x{args.W}_{int(args.cfg)}_{time_str}_noaudio.mp4"
-            # save_videos_grid(
-            #     video,
-            #     save_path,
-            #     n_rows=3,
-            #     fps=args.fps,
-            # )
+
+            # if not os.path.exists(save_dir):
+            #     os.mkdir(save_dir)
+
+            save_videos_grid(
+                video,
+                save_path,
+                n_rows=1,
+                fps=args.fps,
+            )
             
             stream = ffmpeg.input(save_path)
             audio = ffmpeg.input(audio_path)
